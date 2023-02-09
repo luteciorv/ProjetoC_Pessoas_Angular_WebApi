@@ -46,3 +46,7 @@ Curso Youtube - CRUD com Angular v14.0 e .Net Core Web Api 3.1
 ### Aula 09
 	* Exibição de todas as pessoas cadastradas;
   * Alteração de tela entre Listar Pessoas e Cadastrar nova pessoa;
+
+  ### Aula 10
+	* Edição de pessoa;
+  * Alteração entre as telas de exibição e edição;

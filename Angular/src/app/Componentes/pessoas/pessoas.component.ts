@@ -37,6 +37,22 @@ export class PessoasComponent implements OnInit {
     this.visibilidadeFormulario = true;
   }
 
+  exibirFormularioEdicao(id: number): void{
+    this.pessoasService.recuperarPeloId(id).subscribe(pessoa =>{
+      this.formulario = new FormGroup({
+        nome: new FormControl(pessoa.nome),
+        sobrenome: new FormControl(pessoa.sobrenome),
+        idade: new FormControl(pessoa.idade),
+        profissao: new FormControl(pessoa.profissao)
+      });
+
+      this.tituloFormulario = `Editar ${pessoa.nome} ${pessoa.sobrenome}`;
+    });
+
+    this.visibilidadeTabela = false;
+    this.visibilidadeFormulario = true;
+  }
+
   recuperarTodos() : void {
     this.pessoasService.recuperarTodos().subscribe(resultado => {
       this.pessoas = resultado;
@@ -45,11 +61,20 @@ export class PessoasComponent implements OnInit {
 
   cadastrar() : void{
     const pessoa : Pessoa = this.formulario.value;
-    this.pessoasService.adicionar(pessoa).subscribe(resultado => {
-      this.voltar();
-      alert("Pessoa cadastrada com sucesso!");
-      this.recuperarTodos();
-    });
+
+    if(pessoa.id > 0){
+      this.pessoasService.atualizar(pessoa).subscribe(resultado => {
+        alert("Os dados da pessoa foram alterados com sucesso!");
+        this.voltar();
+        this.recuperarTodos();
+      });
+    }else{
+      this.pessoasService.adicionar(pessoa).subscribe(() => {
+        alert("Pessoa cadastrada com sucesso!");
+        this.voltar();
+        this.recuperarTodos();
+      });
+    }
   }
 
   voltar() : void{
