@@ -42,3 +42,7 @@ Curso Youtube - CRUD com Angular v14.0 e .Net Core Web Api 3.1
 ### Aula 08
 	* Cadastro de pessoa realizado;
   * Unificação dos GITS (Angular e WebApi);
+
+### Aula 09
+	* Exibição de todas as pessoas cadastradas;
+  * Alteração de tela entre Listar Pessoas e Cadastrar nova pessoa;
