@@ -1,7 +1,8 @@
 import { PessoasService } from './../../Services/pessoas.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Pessoa } from 'src/app/Model/Pessoa';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-pessoas',
@@ -17,7 +18,13 @@ export class PessoasComponent implements OnInit {
   visibilidadeTabela: Boolean = true;
   visibilidadeFormulario: Boolean = false;
 
-  constructor(private pessoasService : PessoasService) { }
+  nomePessoa : string = "";
+  id : number = 0;
+  modalRef : BsModalRef = new BsModalRef;
+
+  constructor(
+    private pessoasService : PessoasService,
+    private modalService : BsModalService) { }
 
   ngOnInit(): void {
     this.recuperarTodos();
@@ -51,6 +58,20 @@ export class PessoasComponent implements OnInit {
 
     this.visibilidadeTabela = false;
     this.visibilidadeFormulario = true;
+  }
+
+  exibirModalExcluir(id : number, nome : string, conteudoModal : TemplateRef<any>) : void{
+    this.modalRef = this.modalService.show(conteudoModal);
+    this.id = id;
+    this.nomePessoa = nome;
+  }
+
+  excluir(id : number) : void{
+    this.pessoasService.excluir(id).subscribe(resultado => {
+      this.modalRef.hide();
+      alert("Pessoa excluída com sucesso!");
+      this.recuperarTodos();
+    });
   }
 
   recuperarTodos() : void {
