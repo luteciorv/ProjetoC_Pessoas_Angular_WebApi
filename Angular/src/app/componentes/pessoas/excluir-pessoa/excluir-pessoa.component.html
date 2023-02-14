@@ -1,0 +1,39 @@
+<div class="container p-5">
+  <div class="row">
+    <div class="col-md-6 border rounded m-auto p-5 shadow">
+      <h6>Deseja excluir esta pessoa?</h6>
+      <hr>
+
+      <form [formGroup]="formulario" (ngSubmit)="excluir()" *ngIf="formulario">
+        <div class="form-group">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text" readonly name="nome" class="form-control form-control-sm" formControlName="nome">
+        </div>
+
+        <div class="form-group">
+          <label for="sobrenome" class="form-label">Sobrenome</label>
+          <input type="text" readonly name="sobrenome" class="form-control form-control-sm" formControlName="sobrenome">
+        </div>
+
+        <div class="form-group">
+          <label for="idade" class="form-label">Idade</label>
+          <input type="number" readonly name="idade" class="form-control form-control-sm" formControlName="idade">
+        </div>
+
+        <div class="form-group">
+          <label for="profissao" class="form-label">Profissão</label>
+          <input type="text" readonly name="profissao" class="form-control form-control-sm" formControlName="profissao">
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-sm btn-outline-success">Excluir!</button>
+          </div>
+          <div class="col-md-6 pl-1">
+            <button type="button" class="btn btn-sm btn-outline-danger" routerLink="/Pessoas">Voltar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

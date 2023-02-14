@@ -53,3 +53,21 @@ Curso Youtube - CRUD com Angular v14.0 e .Net Core Web Api 3.1
 
 ### Aula 11
 	* Exclusão de pessoa;  
+
+### Refatoração do código
+  * Criação de pastas separadas para as operações de CRUD;
+  * Adição da interface "IPessoas";
+
+
+### Telas da Aplicação
+> * Página principal
+![](Telas/Tela_Principal.PNG?raw=true)
+
+> * Página de cadastro
+![](Telas/Tela_Cadastro.PNG?raw=true)
+
+> * Página de edição
+![](Telas/Tela_Editar.PNG?raw=true)
+
+> * Página de deleção
+![](Telas/Tela_Apagar.PNG?raw=true)

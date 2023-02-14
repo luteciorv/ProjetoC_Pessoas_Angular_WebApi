@@ -1,6 +1,6 @@
+import { IPessoa } from './../interfaces/IPessoa';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pessoa } from '../Model/Pessoa';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
@@ -12,30 +12,31 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class PessoasService {
-  url = 'https://localhost:5001/api/pessoas';
+  private readonly apiRoute = 'https://localhost:5001/api/pessoas';
 
   constructor(private http: HttpClient) { }
 
-  recuperarTodos() : Observable<Pessoa[]>{
-    return this.http.get<Pessoa[]>(this.url);
+  criar(pessoa: IPessoa) : Observable<IPessoa>{
+    return this.http.post<IPessoa>(this.apiRoute, pessoa, httpOptions);
   }
 
-  recuperarPeloId(id: number) : Observable<Pessoa>{
-    const apiUrl = `${this.url}/${id}`;
-    return this.http.get<Pessoa>(apiUrl);
+  recuperarTodos() : Observable<IPessoa[]>{
+    return this.http.get<IPessoa[]>(this.apiRoute);
   }
 
-  adicionar(pessoa: Pessoa) : Observable<any>{
-    return this.http.post<Pessoa>(this.url, pessoa, httpOptions);
+  recuperarPeloId(id: number) : Observable<IPessoa>{
+    const urlRecuperar = `${this.apiRoute}/${id}`;
+    return this.http.get<IPessoa>(urlRecuperar);
   }
 
-  atualizar(pessoa: Pessoa) : Observable<any>{
-    return this.http.put<Pessoa>(this.url, pessoa, httpOptions);
+  atualizar(pessoa: IPessoa) : Observable<IPessoa>{
+    return this.http.put<IPessoa>(this.apiRoute, pessoa, httpOptions);
   }
 
   excluir(id: number) : Observable<any>{
-    const apiUrl = `${this.url}/${id}`;
-    return this.http.delete<Number>(apiUrl, httpOptions);
+    const urlExcluir = `${this.apiRoute}/${id}`;
+    return this.http.delete<Number>(urlExcluir, httpOptions);
   }
 }
